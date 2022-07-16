@@ -40,6 +40,11 @@ steps:
       webhook_token:
         from_secret: DISCORD_WEBHOOK_TOKEN
 
+trigger:
+  event:
+    - push
+    - pull_request
+
 ---
 kind: pipeline
 type: docker
@@ -97,3 +102,9 @@ steps:
         from_secret: DISCORD_WEBHOOK_ID
       webhook_token:
         from_secret: DISCORD_WEBHOOK_TOKEN
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
