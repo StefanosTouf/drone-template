@@ -10,9 +10,9 @@ steps:
       target: test
       dry_run: true
       repo:
-        from_secret: REGISTRY_REPO
+        from_secret: registry.draive.gr/library/drone-template
       registry:
-        from_secret: REGISTRY_ADDRESS
+        from_secret: registry.draive.gr
       tags:
         - latest
 
@@ -22,9 +22,9 @@ steps:
       target: build
       dry_run: true
       repo:
-        from_secret: REGISTRY_REPO
+        from_secret: registry.draive.gr/library/drone-template
       registry:
-        from_secret: REGISTRY_ADDRESS
+        from_secret: registry.draive.gr
       tags:
         - latest
 
@@ -52,9 +52,9 @@ steps:
       target: test
       dry_run: true
       repo:
-        from_secret: REGISTRY_REPO
+        from_secret: registry.draive.gr/library/drone-template
       registry:
-        from_secret: REGISTRY_ADDRESS
+        from_secret: registry.draive.gr
       tags:
         - latest
 
@@ -64,9 +64,9 @@ steps:
       target: build
       dry_run: true
       repo:
-        from_secret: REGISTRY_REPO
+        from_secret: registry.draive.gr/library/drone-template
       registry:
-        from_secret: REGISTRY_ADDRESS
+        from_secret: registry.draive.gr
       tags:
         - latest
 
@@ -75,9 +75,9 @@ steps:
     settings:
       target: final
       repo:
-        from_secret: REGISTRY_REPO
+        from_secret: registry.draive.gr/library/drone-template
       registry:
-        from_secret: REGISTRY_ADDRESS
+        from_secret: registry.draive.gr
       tags:
         - latest
       insecure: true
