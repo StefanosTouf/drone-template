@@ -60,16 +60,6 @@ steps:
       tags:
         - latest
 
-  - name: build
-    image: plugins/docker
-    settings:
-      target: build
-      dry_run: true
-      repo: registry.draive.gr/library/drone-template
-      registry: registry.draive.gr
-      tags:
-        - latest
-
   - name: publish
     image: plugins/docker
     settings:
