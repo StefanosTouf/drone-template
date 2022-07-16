@@ -9,10 +9,8 @@ steps:
     settings:
       target: test
       dry_run: true
-      repo:
-        from_secret: registry.draive.gr/library/drone-template
-      registry:
-        from_secret: registry.draive.gr
+      repo: registry.draive.gr/library/drone-template
+      registry: registry.draive.gr
       tags:
         - latest
 
@@ -21,10 +19,8 @@ steps:
     settings:
       target: build
       dry_run: true
-      repo:
-        from_secret: registry.draive.gr/library/drone-template
-      registry:
-        from_secret: registry.draive.gr
+      repo: registry.draive.gr/library/drone-template
+      registry: registry.draive.gr
       tags:
         - latest
 
@@ -59,35 +55,29 @@ steps:
     settings:
       target: test
       dry_run: true
-      repo:
-        from_secret: registry.draive.gr/library/drone-template
-      registry:
-        from_secret: registry.draive.gr
-#      tags:
-#        - latest
+      repo: registry.draive.gr/library/drone-template
+      registry: registry.draive.gr
+      tags:
+        - latest
 
   - name: build
     image: plugins/docker
     settings:
       target: build
       dry_run: true
-      repo:
-        from_secret: registry.draive.gr/library/drone-template
-      registry:
-        from_secret: registry.draive.gr
-#      tags:
-#        - latest
+      repo: registry.draive.gr/library/drone-template
+      registry: registry.draive.gr
+      tags:
+        - latest
 
   - name: publish
     image: plugins/docker
     settings:
       target: final
-      repo:
-        from_secret: registry.draive.gr/library/drone-template
-      registry:
-        from_secret: registry.draive.gr
-#      tags:
-#        - latest
+      repo: registry.draive.gr/library/drone-template
+      registry: registry.draive.gr
+      tags:
+        - latest
       insecure: true
       username:
         from_secret: REGISTRY_USERNAME
