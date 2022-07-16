@@ -41,6 +41,9 @@ steps:
         from_secret: DISCORD_WEBHOOK_TOKEN
 
 trigger:
+  branch:
+    exclude:
+      - master
   event:
     - push
     - pull_request
