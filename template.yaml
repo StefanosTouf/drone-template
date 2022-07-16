@@ -1,0 +1,99 @@
+---
+kind: pipeline
+type: docker
+name: on_commit
+
+steps:
+  - name: test
+    image: plugins/docker
+    settings:
+      target: test
+      dry_run: true
+      repo:
+        from_secret: REGISTRY_REPO
+      registry:
+        from_secret: REGISTRY_ADDRESS
+      tags:
+        - latest
+
+  - name: build
+    image: plugins/docker
+    settings:
+      target: build
+      dry_run: true
+      repo:
+        from_secret: REGISTRY_REPO
+      registry:
+        from_secret: REGISTRY_ADDRESS
+      tags:
+        - latest
+
+  - name: discord_notification
+    image: appleboy/drone-discord
+    when:
+      status:
+        - failure
+        - success
+    settings:
+      webhook_id:
+        from_secret: DISCORD_WEBHOOK_ID
+      webhook_token:
+        from_secret: DISCORD_WEBHOOK_TOKEN
+
+---
+kind: pipeline
+type: docker
+name: on_push_master
+
+steps:
+  - name: test
+    image: plugins/docker
+    settings:
+      target: test
+      dry_run: true
+      repo:
+        from_secret: REGISTRY_REPO
+      registry:
+        from_secret: REGISTRY_ADDRESS
+      tags:
+        - latest
+
+  - name: build
+    image: plugins/docker
+    settings:
+      target: build
+      dry_run: true
+      repo:
+        from_secret: REGISTRY_REPO
+      registry:
+        from_secret: REGISTRY_ADDRESS
+      tags:
+        - latest
+
+  - name: publish
+    image: plugins/docker
+    settings:
+      target: final
+      repo:
+        from_secret: REGISTRY_REPO
+      registry:
+        from_secret: REGISTRY_ADDRESS
+      tags:
+        - latest
+      insecure: true
+      username:
+        from_secret: REGISTRY_USERNAME
+      password:
+        from_secret: REGISTRY_PASSWORD
+
+  - name: discord_notification
+    image: appleboy/drone-discord
+    when:
+      status:
+        - failure
+        - success
+    settings:
+      webhook_id:
+        from_secret: DISCORD_WEBHOOK_ID
+      webhook_token:
+        from_secret: DISCORD_WEBHOOK_TOKEN
