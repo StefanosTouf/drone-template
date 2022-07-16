@@ -63,8 +63,8 @@ steps:
         from_secret: registry.draive.gr/library/drone-template
       registry:
         from_secret: registry.draive.gr
-      tags:
-        - latest
+#      tags:
+#        - latest
 
   - name: build
     image: plugins/docker
@@ -75,8 +75,8 @@ steps:
         from_secret: registry.draive.gr/library/drone-template
       registry:
         from_secret: registry.draive.gr
-      tags:
-        - latest
+#      tags:
+#        - latest
 
   - name: publish
     image: plugins/docker
