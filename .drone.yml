@@ -86,8 +86,8 @@ steps:
         from_secret: registry.draive.gr/library/drone-template
       registry:
         from_secret: registry.draive.gr
-      tags:
-        - latest
+#      tags:
+#        - latest
       insecure: true
       username:
         from_secret: REGISTRY_USERNAME
