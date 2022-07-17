@@ -24,7 +24,7 @@ ENTRYPOINT ["java", "-jar", "/opt/app.jar"]
 
 ## .drone.yml
 
-A Drone configuration can contain multiple pipelines that can be ran under different circumstances. A good starting point can be two pipelines, one testing and building the image on each commit and one testing, building, and deploying the image after a successful pr to master.
+A Drone configuration can contain multiple pipelines that can be ran under different circumstances. A good starting point can be two pipelines, one testing and building the image on each commit and one testing, building, and deploying the image after a successful push to master.
 
 ### `on_commit` pipeline
 
