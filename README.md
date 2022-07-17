@@ -2,7 +2,7 @@ This repository is used to support members of Draive (https://draive.gr).
 
 ## Dockerfile
 
-A drone CI pipeline can use the different stages of a Dockerfile to run tests, build, and deploy an image. A Dockerfile should contain stages for each of those targets. The following example uses the Dockerfile of this repository.
+A Drone CI pipeline can use the different stages of a Dockerfile to run tests, build, and deploy an image. A Dockerfile should contain stages for each of those targets. The following example uses the Dockerfile of this repository.
 
 ```dockerfile
 FROM sbtscala/scala-sbt:11.0.15_1.7.1_2.12.16 AS test
@@ -24,7 +24,7 @@ ENTRYPOINT ["java", "-jar", "/opt/app.jar"]
 
 ## .drone.yml
 
-A drone configuration can contain multiple pipelines that can be ran under different circumstances. A good starting point can be two pipelines, one testing and building the image on each commit and one testing, building, and deploying the image after a successful pr to master.
+A Drone configuration can contain multiple pipelines that can be ran under different circumstances. A good starting point can be two pipelines, one testing and building the image on each commit and one testing, building, and deploying the image after a successful pr to master.
 
 ### `on_commit` pipeline
 
@@ -93,7 +93,7 @@ trigger:
 
 * `discord_notification`
   * `when`: sends the notification only on build success and failure.
-  * `settings`: configures the discord channel to which the notification will be sent. These values are retrieved from secrets configured on the drone server.
+  * `settings`: configures the discord channel to which the notification will be sent. These values are retrieved from secrets configured on the Drone server.
 
 * `target`: this pipeline is ran on every pull request and any push to any branch other than master.
 
@@ -159,12 +159,12 @@ trigger:
   * `target`: targets the final stage of the Dockerfile which is configured to package the output of the build stage into a production-ready image.
   * `repo`: the repository containing this project's images.
   * `registry`: the registry containing this project's images.
-  * `insecure`: the registry and the drone server are on the same private network, so https communication isn't necessary.
-  * `username` and `password`: credentials of the registry user that is used to push the images. The values are retrieved from secrets on the drone server. 
+  * `insecure`: the registry and the Drone server are on the same private network, so https communication isn't necessary.
+  * `username` and `password`: credentials of the registry user that is used to push the images. The values are retrieved from secrets on the Drone server. 
   * `tags`: tag of the image.
 
 * `discord_notification`
   * `when`: sends the notification only on build success and failure.
-  * `settings`: configures the discord channel to which the notification will be sent. These values are retrieved from secrets configured on the drone server.
+  * `settings`: configures the discord channel to which the notification will be sent. These values are retrieved from secrets configured on the Drone server.
 
 * `target`: this pipeline is ran on every push to master.
