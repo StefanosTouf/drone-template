@@ -1,3 +1,5 @@
+This repository is used to support members of Draive (https://draive.gr).
+
 ## Drone/Docker cooperation
 
 A drone CI pipeline can use the different stages of a Dockerfile to run tests, build, and deploy an image. A Dockerfile should contain stages for each of those targets. The following example uses the Dockerfile of this repository.
