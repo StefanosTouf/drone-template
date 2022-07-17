@@ -75,9 +75,94 @@ trigger:
     - pull_request
 ```
 
-**Steps**:
-* `test`: 
-  * `target: test`: targets the test stage of the Dockerfile which is configured to run tests.
+* `test` 
+  * `target`: targets the test stage of the Dockerfile which is configured to run tests.
   * `dry_run`: doesn't publish an image to a repo.
+  * `repo`: the repository containing this project's images. Isn't used during a dry run but still needs to be present.
+  * `registry`: the registry containing this project's images. Isn't used during a dry run but still needs to be present.
+  * `tags`: tag of the image.
 
+* `build`
+  * `target`: targets the build stage of the Dockerfile which is configured to build the project.
+  * `dry_run`: doesn't publish an image to a repo.
+  * `repo`: the repository containing this project's images. Isn't used during a dry run but still needs to be present.
+  * `registry`: the registry containing this project's images. Isn't used during a dry run but still needs to be present.
+  * `tags`: tag of the image.
 
+* `discord_notification`
+  * `when`: sends the notification only on build success and failure.
+  * `settings`: configures the discord channel to which the notification will be sent. These values are retrieved from secrets configured on the drone server.
+
+* `target`: this pipeline is ran on every pull request and any push to any branch other than master.
+
+### `on_push_master` pipeline
+
+```yml
+kind: pipeline
+type: docker
+name: on_push_master
+
+steps:
+  - name: test
+    image: plugins/docker
+    settings:
+      target: test
+      dry_run: true
+      repo: registry.draive.gr/library/drone-template
+      registry: registry.draive.gr
+      tags:
+        - latest
+
+  - name: publish
+    image: plugins/docker
+    settings:
+      target: final
+      repo: registry.draive.gr/library/drone-template
+      registry: registry.draive.gr
+      tags:
+        - latest
+      insecure: true
+      username:
+        from_secret: REGISTRY_USERNAME
+      password:
+        from_secret: REGISTRY_PASSWORD
+
+  - name: discord_notification
+    image: appleboy/drone-discord
+    when:
+      status:
+        - failure
+        - success
+    settings:
+      webhook_id:
+        from_secret: DISCORD_WEBHOOK_ID
+      webhook_token:
+        from_secret: DISCORD_WEBHOOK_TOKEN
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
+```
+
+* `test` 
+  * `target`: targets the test stage of the Dockerfile which is configured to run tests.
+  * `dry_run`: doesn't publish an image to a repo.
+  * `repo`: the repository containing this project's images. Isn't used during a dry run but still needs to be present.
+  * `registry`: the registry containing this project's images. Isn't used during a dry run but still needs to be present.
+  * `tags`: tag of the image.
+
+* `publish`
+  * `target`: targets the final stage of the Dockerfile which is configured to package the output of the build stage into a production-ready image.
+  * `repo`: the repository containing this project's images.
+  * `registry`: the registry containing this project's images.
+  * `insecure`: the registry and the drone server are on the same private network, so https communication isn't necessary.
+  * `username` and `password`: credentials of the registry user that is used to push the images. The values are retrieved from secrets on the drone server. 
+  * `tags`: tag of the image.
+
+* `discord_notification`
+  * `when`: sends the notification only on build success and failure.
+  * `settings`: configures the discord channel to which the notification will be sent. These values are retrieved from secrets configured on the drone server.
+
+* `target`: this pipeline is ran on every push to master.
