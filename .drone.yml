@@ -9,8 +9,8 @@ steps:
     settings:
       target: test
       dry_run: true
-      repo: registry.draive.gr/library/drone-template
-      registry: registry.draive.gr
+      # repo: registry.draive.gr/library/drone-template
+      # registry: registry.draive.gr
       tags:
         - latest
 
@@ -19,8 +19,8 @@ steps:
     settings:
       target: build
       dry_run: true
-      repo: registry.draive.gr/library/drone-template
-      registry: registry.draive.gr
+      # repo: registry.draive.gr/library/drone-template
+      # registry: registry.draive.gr
       tags:
         - latest
 
@@ -55,8 +55,8 @@ steps:
     settings:
       target: test
       dry_run: true
-      repo: registry.draive.gr/library/drone-template
-      registry: registry.draive.gr
+      # repo: registry.draive.gr/library/drone-template
+      # registry: registry.draive.gr
       tags:
         - latest
 
