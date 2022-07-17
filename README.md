@@ -95,7 +95,7 @@ trigger:
   * `when`: sends the notification only on build success and failure.
   * `settings`: configures the discord channel to which the notification will be sent. These values are retrieved from secrets configured on the Drone server.
 
-* `target`: this pipeline is ran on every pull request and any push to any branch other than master.
+* `trigger`: this pipeline is ran on every pull request and any push to any branch other than master.
 
 ### `on_push_master` pipeline
 
@@ -167,4 +167,4 @@ trigger:
   * `when`: sends the notification only on build success and failure.
   * `settings`: configures the discord channel to which the notification will be sent. These values are retrieved from secrets configured on the Drone server.
 
-* `target`: this pipeline is ran on every push to master.
+* `trigger`: this pipeline is ran on every push to master.
