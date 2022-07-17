@@ -1,6 +1,6 @@
 This repository is used to support members of Draive (https://draive.gr).
 
-## Drone/Docker cooperation
+## Dockerfile
 
 A drone CI pipeline can use the different stages of a Dockerfile to run tests, build, and deploy an image. A Dockerfile should contain stages for each of those targets. The following example uses the Dockerfile of this repository.
 
@@ -22,7 +22,7 @@ COPY --from=build /opt/template/target/scala-2.12/drone-sample-project-assembly-
 ENTRYPOINT ["java", "-jar", "/opt/app.jar"]
 ```
 
-## Explaining .drone.yml
+## .drone.yml
 
 A drone configuration can contain multiple pipelines that can be ran under different circumstances. A good starting point can be two pipelines, one testing and building the image on each commit and one testing, building, and deploying the image after a successful pr to master.
 
